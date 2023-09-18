@@ -1,4 +1,4 @@
-package DM;
+package DataLayer.DAO.DM;
 
 public class Dish {
     private int DishID;
