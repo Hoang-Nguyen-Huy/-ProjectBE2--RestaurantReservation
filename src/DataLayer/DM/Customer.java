@@ -1,4 +1,4 @@
-package DataLayer.DAO.DM;
+package DataLayer.DM;
 
 public class Customer {
     private int CustomerID;
@@ -11,6 +11,12 @@ public class Customer {
     }
     public Customer (int CustomerID, String CustomerName, String CustomerEmail, String CustomerPhone) {
         this.CustomerID = CustomerID;
+        this.CustomerName = CustomerName;
+        this.CustomerEmail = CustomerEmail;
+        this.CustomerPhone = CustomerPhone;
+    }
+
+    public Customer(String CustomerName, String CustomerEmail, String CustomerPhone) {
         this.CustomerName = CustomerName;
         this.CustomerEmail = CustomerEmail;
         this.CustomerPhone = CustomerPhone;

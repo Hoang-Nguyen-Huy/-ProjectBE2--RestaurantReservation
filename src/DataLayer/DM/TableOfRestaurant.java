@@ -1,4 +1,4 @@
-package DataLayer.DAO.DM;
+package DataLayer.DM;
 
 public class TableOfRestaurant {
     private int TableID;

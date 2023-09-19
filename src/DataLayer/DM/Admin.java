@@ -1,4 +1,4 @@
-package DataLayer.DAO.DM;
+package DataLayer.DM;
 
 public class Admin {
     private int AdminID;
@@ -16,6 +16,17 @@ public class Admin {
         this.AdminPassword = AdminPassword;
     }
 
+    public Admin(int AdminID, String AdminName, String AdminPassword) {
+        this.AdminID = AdminID;
+        this.AdminName = AdminName;
+        this.AdminPassword = AdminPassword;
+    }
+
+    public Admin(String AdminName, String AdminEmail, String AdminPassword) {
+        this.AdminName = AdminName;
+        this.AdminEmail = AdminEmail;
+        this.AdminPassword = AdminPassword;
+    }
     public int getAdminID() {
         return AdminID;
     }
