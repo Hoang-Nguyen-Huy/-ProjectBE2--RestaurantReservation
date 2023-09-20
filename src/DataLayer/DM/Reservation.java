@@ -1,5 +1,7 @@
 package DataLayer.DM;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 public class Reservation {
@@ -7,7 +9,8 @@ public class Reservation {
     private String FullName;
     private String Email;
     private String Phone;
-    private LocalDateTime BookingDateTime;
+    private Date BookingDate;
+    private Time BookingTime;
     private int NumberOfPeople;
     private String Requirement;
 
@@ -16,17 +19,56 @@ public class Reservation {
     public Reservation () {
 
     }
-    public Reservation(int ReservationID, String FullName, String Email, String Phone, LocalDateTime BookingDateTime, int NumberOfPeople, String Requirement, Customer customer) {
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, Customer customer) {
         this.ReservationID = ReservationID;
         this.FullName = FullName;
         this.Email = Email;
         this.Phone = Phone;
-        this.BookingDateTime = BookingDateTime;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
         this.NumberOfPeople = NumberOfPeople;
         this.Requirement = Requirement;
         this.customer = customer;
     }
 
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement) {
+        this.ReservationID = ReservationID;
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.Requirement = Requirement;
+    }
+    public Reservation( String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, Customer customer) {
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.customer = customer;
+    }
+
+    public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement) {
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.Requirement = Requirement;
+    }
+
+    public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople) {
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+    }
     public int getReservationID() {
         return ReservationID;
     }
@@ -43,8 +85,12 @@ public class Reservation {
         return Phone;
     }
 
-    public LocalDateTime getBookingDateTime() {
-        return BookingDateTime;
+    public Date getBookingDate() {
+        return BookingDate;
+    }
+
+    public Time getBookingTime() {
+        return BookingTime;
     }
 
     public int getNumberOfPeople() {
@@ -75,8 +121,12 @@ public class Reservation {
         this.Phone = Phone;
     }
 
-    public void setBookingDateTime(LocalDateTime BookingDateTime) {
-        this.BookingDateTime = BookingDateTime;
+    public void setBookingDate(Date BookingDate) {
+        this.BookingDate = BookingDate;
+    }
+
+    public void setBookingTime(Time BookingTime) {
+        this.BookingTime = BookingTime;
     }
 
     public void setNumberOfPeople(int NumberOfPeople) {
@@ -98,9 +148,11 @@ public class Reservation {
                 ", FullName='" + FullName + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Phone='" + Phone + '\'' +
-                ", BookingDateTime=" + BookingDateTime +
+                ", BookingDate=" + BookingDate +
+                ", BookingTime=" + BookingTime +
                 ", NumberOfPeople=" + NumberOfPeople +
                 ", Requirement='" + Requirement + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 }

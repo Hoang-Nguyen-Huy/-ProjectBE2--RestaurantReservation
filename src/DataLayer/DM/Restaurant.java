@@ -1,5 +1,6 @@
 package DataLayer.DM;
 
+import java.sql.Time;
 import java.time.LocalTime;
 
 public class Restaurant {
@@ -8,14 +9,14 @@ public class Restaurant {
     private String Address;
     private String RestaurantPhone;
     private String RestaurantDescription;
-    private LocalTime OpenTime;
-    private LocalTime CloseTime;
+    private Time OpenTime;
+    private Time CloseTime;
     private Admin admin;
 
     public Restaurant () {
 
     }
-    public Restaurant(int RestaurantID, String RestaurantName, String Address, String RestaurantPhone, String RestaurantDescription, LocalTime OpenTime, LocalTime CloseTime, Admin admin) {
+    public Restaurant(int RestaurantID, String RestaurantName, String Address, String RestaurantPhone, String RestaurantDescription, Time OpenTime, Time CloseTime, Admin admin) {
         this.RestaurantID = RestaurantID;
         this.RestaurantName = RestaurantName;
         this.Address = Address;
@@ -26,6 +27,24 @@ public class Restaurant {
         this.admin = admin;
     }
 
+    public Restaurant(int RestaurantID, String RestaurantName, String Address, String RestaurantPhone, String RestaurantDescription, Time OpenTime, Time CloseTime) {
+        this.RestaurantID = RestaurantID;
+        this.RestaurantName = RestaurantName;
+        this.Address = Address;
+        this.RestaurantPhone = RestaurantPhone;
+        this.RestaurantDescription = RestaurantDescription;
+        this.OpenTime = OpenTime;
+        this.CloseTime = CloseTime;
+    }
+
+    public Restaurant(String RestaurantName, String Address, String RestaurantPhone, String RestaurantDescription, Time OpenTime, Time CloseTime) {
+        this.RestaurantName = RestaurantName;
+        this.Address = Address;
+        this.RestaurantPhone = RestaurantPhone;
+        this.RestaurantDescription = RestaurantDescription;
+        this.OpenTime = OpenTime;
+        this.CloseTime = CloseTime;
+    }
     public int getRestaurantID() {
         return RestaurantID;
     }
@@ -46,11 +65,11 @@ public class Restaurant {
         return RestaurantDescription;
     }
 
-    public LocalTime getOpenTime() {
+    public Time getOpenTime() {
         return OpenTime;
     }
 
-    public LocalTime getCloseTime() {
+    public Time getCloseTime() {
         return CloseTime;
     }
 
@@ -77,11 +96,11 @@ public class Restaurant {
         this.RestaurantDescription = RestaurantDescription;
     }
 
-    public void setOpenTime(LocalTime OpenTime) {
+    public void setOpenTime(Time OpenTime) {
         this.OpenTime = OpenTime;
     }
 
-    public void setCloseTime(LocalTime CloseTime) {
+    public void setCloseTime(Time CloseTime) {
         this.CloseTime = CloseTime;
     }
 

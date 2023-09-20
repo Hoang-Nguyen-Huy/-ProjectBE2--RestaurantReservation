@@ -1,7 +1,7 @@
 package DataLayer.DM;
 
 public class Customer {
-    private int CustomerID;
+    protected int CustomerID;
     private String CustomerName;
     private String CustomerEmail;
     private String CustomerPhone;
@@ -22,6 +22,9 @@ public class Customer {
         this.CustomerPhone = CustomerPhone;
     }
 
+    public Customer(int CustomerID) {
+        this.CustomerID = CustomerID;
+    }
     public int getCustomerID() {
         return CustomerID;
     }

@@ -18,6 +18,12 @@ public class Staff {
         this.admin = admin;
     }
 
+    public Staff(int StaffID, String StaffName, String StaffPhone, String StaffRole) {
+        this.StaffID = StaffID;
+        this.StaffName = StaffName;
+        this.StaffPhone = StaffPhone;
+        this.StaffRole = StaffRole;
+    }
     public int getStaffID() {
         return StaffID;
     }

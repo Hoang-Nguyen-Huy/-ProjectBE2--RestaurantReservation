@@ -5,17 +5,15 @@ public class TableOfRestaurant {
     private int Capacity;
     private String TableType;
     private String TableStatus;
-    private Admin admin;
 
     public TableOfRestaurant () {
 
     }
-    public TableOfRestaurant (int TableID, int Capacity, String TableType, String TableStatus, Admin admin) {
+    public TableOfRestaurant (int TableID, int Capacity, String TableType, String TableStatus) {
         this.TableID = TableID;
         this.Capacity = Capacity;
         this.TableType = TableType;
         this.TableStatus = TableStatus;
-        this.admin = admin;
     }
 
     public int getTableID() {
@@ -34,10 +32,6 @@ public class TableOfRestaurant {
         return TableStatus;
     }
 
-    public Admin getAdmin() {
-        return admin;
-    }
-
     public void setTableID(int TableID) {
         this.TableID = TableID;
     }
@@ -52,10 +46,6 @@ public class TableOfRestaurant {
 
     public void setTableStatus(String TableStatus) {
         this.TableStatus = TableStatus;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
     }
 
     @Override
