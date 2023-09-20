@@ -5,18 +5,17 @@ public class Dish {
     private String DishName;
     private double price;
     private String description;
-    private int DishRate;
-    private MenuItem menuItem;
+    private float DishRate;
     public Dish () {
 
     }
-    public Dish(int DishID, String DishName, double price, String description, int DishRate, MenuItem menuItem) {
+    public Dish(int DishID, String DishName, double price, String description, float DishRate) {
         this.DishID = DishID;
         this.DishName = DishName;
         this.price = price;
         this.description = description;
         this.DishRate = DishRate;
-        this.menuItem = menuItem;
+
     }
 
     public int getDishID() {
@@ -35,12 +34,8 @@ public class Dish {
         return description;
     }
 
-    public int getDishRate() {
+    public float getDishRate() {
         return DishRate;
-    }
-
-    public MenuItem getMenuItem() {
-        return menuItem;
     }
 
     public void setDishID(int DishID) {
@@ -59,12 +54,8 @@ public class Dish {
         this.description = description;
     }
 
-    public void setDishRate(int DishRate) {
+    public void setDishRate(float DishRate) {
         this.DishRate = DishRate;
-    }
-
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
     }
 
     @Override

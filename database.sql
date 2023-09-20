@@ -39,7 +39,8 @@ CREATE TABLE reservation (
     FullName VARCHAR(50) NOT NULL, 
     Email VARCHAR(128) NOT NULL, 
 	Phone VARCHAR(12) NOT NULL, 
-    BookingDateTime DATETIME NOT NULL, 
+    BookingDate DATE NOT NULL,
+    BookingTime TIME NOT NULL,
     NumberOfPeople INT NOT NULL, 
     Requirement VARCHAR(1024),
     CustomerID INT NOT NULL, 
@@ -50,9 +51,7 @@ CREATE TABLE tableOfRestaurant (
 	TableID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     Capacity INT NOT NULL, 
     TableType VARCHAR(50) NOT NULL, 
-    TableStatus VARCHAR(50) NOT NULL,
-    AdminID INT NOT NULL,
-    FOREIGN KEY (AdminID) REFERENCES Admin (AdminID)
+    TableStatus VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE tableReservation (
@@ -63,19 +62,12 @@ CREATE TABLE tableReservation (
     FOREIGN KEY (ReservationID) REFERENCES Reservation (ReservationID)
 );
 
-CREATE TABLE menuItem (
-	MenuID INT PRIMARY KEY, 
-    MenuCategory VARCHAR(50) NOT NULL
-);
-
 CREATE TABLE Dish (
 	DishID 	INT PRIMARY KEY AUTO_INCREMENT, 
     DishName VARCHAR(512) NOT NULL, 
     DishPrice FLOAT NOT NULL, 
     DishDescription VARCHAR(1024) NOT NULL, 
-    DishRate FLOAT DEFAULT 0,
-    MenuID INT NOT NULL, 
-    FOREIGN KEY (MenuID) REFERENCES menuItem (MenuID)
+    DishRate FLOAT DEFAULT 0
 );
 
 CREATE TABLE Bill (

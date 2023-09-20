@@ -5,21 +5,17 @@ public class Staff {
     private String StaffName;
     private String StaffPhone;
     private String StaffRole;
-    private Admin admin;
 
     public Staff () {
 
     }
-    public Staff(int StaffID, String StaffName, String StaffPhone, String StaffRole, Admin admin) {
+    public Staff(int StaffID, String StaffName, String StaffPhone, String StaffRole) {
         this.StaffID = StaffID;
         this.StaffName = StaffName;
         this.StaffPhone = StaffPhone;
         this.StaffRole = StaffRole;
-        this.admin = admin;
     }
-
-    public Staff(int StaffID, String StaffName, String StaffPhone, String StaffRole) {
-        this.StaffID = StaffID;
+    public Staff(String StaffName, String StaffPhone, String StaffRole) {
         this.StaffName = StaffName;
         this.StaffPhone = StaffPhone;
         this.StaffRole = StaffRole;
@@ -39,10 +35,6 @@ public class Staff {
         return StaffRole;
     }
 
-    public Admin getAdmin() {
-        return admin;
-    }
-
     public void setStaffID(int StaffID) {
         this.StaffID = StaffID;
     }
@@ -57,10 +49,6 @@ public class Staff {
 
     public void setStaffRole (String StaffRole) {
         this.StaffRole = StaffRole;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
     }
 
     @Override
