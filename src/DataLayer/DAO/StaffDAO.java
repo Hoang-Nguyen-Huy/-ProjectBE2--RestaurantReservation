@@ -31,7 +31,9 @@ public class StaffDAO implements DAOInterface<Staff> {
 
             result = pst.executeUpdate();
 
-            System.out.println("There is " + result + " change");
+            if(result != 0) {
+                System.out.println("Add Staff successfully");
+            }
 
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
