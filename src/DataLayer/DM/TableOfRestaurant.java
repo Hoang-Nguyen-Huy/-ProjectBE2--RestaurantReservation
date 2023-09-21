@@ -1,5 +1,7 @@
 package DataLayer.DM;
 
+import DataLayer.DAO.TableDAO;
+
 public class TableOfRestaurant {
     private int TableID;
     private int Capacity;
@@ -16,6 +18,23 @@ public class TableOfRestaurant {
         this.TableStatus = TableStatus;
     }
 
+    public TableOfRestaurant (int TableID, int Capacity, String TableType) {
+        this.TableID = TableID;
+        this.Capacity = Capacity;
+        this.TableType = TableType;
+    }
+
+    public TableOfRestaurant(int Capacity, String TableType) {
+        this.Capacity = Capacity;
+        this.TableType = TableType;
+    }
+
+    public TableOfRestaurant(int TableID) {
+        this.TableID = TableID;
+    }
+    public TableOfRestaurant(String TableStatus) {
+        this.TableStatus = TableStatus;
+    }
     public int getTableID() {
         return TableID;
     }

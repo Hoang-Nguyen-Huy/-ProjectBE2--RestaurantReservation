@@ -179,6 +179,43 @@ public class ReservationDAO implements DAOInterface<Reservation>{
         return result;
     }
 
+    public ArrayList<Reservation> selectByPhone(Reservation reservation1) {
+        ArrayList<Reservation> result = new ArrayList<Reservation>();
+
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "SELECT * FROM resevation" +
+                    " WHERE Phone = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, reservation1.getPhone());
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("ReservationID");
+                String name = rs.getString("FullName");
+                String email = rs.getString("Email");
+                String phone = rs.getString("Phone");
+                Date BookingDate = rs.getDate("BookingDate");
+                Time BookingTime = rs.getTime("BookingTime");
+                int noPeople = rs.getInt("NumberOfPeople");
+                String requirement = rs.getString("Requirement");
+
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement);
+
+
+                result.add(reservation);
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     @Override
     public ArrayList<Reservation> selectByCondition(String condition) {
         ArrayList<Reservation> result = new ArrayList<Reservation>();
