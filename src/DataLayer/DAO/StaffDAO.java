@@ -2,6 +2,7 @@ package DataLayer.DAO;
 
 import DataLayer.DM.Admin;
 import DataLayer.DM.Staff;
+import PresentationLayer.UI.AdminMenuUI;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class StaffDAO implements DAOInterface<Staff> {
+    AdminMenuUI ui = new AdminMenuUI();
     public static StaffDAO getInstance() {
         return new StaffDAO();
     }
@@ -73,6 +75,99 @@ public class StaffDAO implements DAOInterface<Staff> {
         return result;
     }
 
+    public int updateName (Staff staff) {
+        int result = 0;
+
+        System.out.print("Enter new full name: ");
+        String newName = ui.EnterInfor();
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "UPDATE staff" +
+                    " SET " +
+                    "StaffName = ?" +
+                    " WHERE StaffID = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, newName);
+            pst.setInt(2, staff.getStaffID());
+
+            result = pst.executeUpdate();
+
+            if (result != 0) {
+                System.out.println("Update Name successfully!!!");
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updatePhone(Staff staff) {
+        int result = 0;
+
+        System.out.print("Enter new phone: ");
+        String newPhone = ui.EnterInfor();
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "UPDATE staff" +
+                    " SET " +
+                    "StaffPhone = ?" +
+                    " WHERE StaffID = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, newPhone);
+            pst.setInt(2, staff.getStaffID());
+
+            result = pst.executeUpdate();
+
+            if (result != 0) {
+                System.out.println("Update Phone successfully!!!");
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updateRole(Staff staff) {
+        int result = 0;
+
+        System.out.print("Enter new role: ");
+        String newRole = ui.EnterInfor();
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "UPDATE staff" +
+                    " SET " +
+                    "StaffRole = ?" +
+                    " WHERE StaffID = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, newRole);
+            pst.setInt(2, staff.getStaffID());
+
+            result = pst.executeUpdate();
+
+            if (result != 0) {
+                System.out.println("Update Role successfully!!!");
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     @Override
     public int delete(Staff staff) {
         int result = 0;
@@ -88,7 +183,9 @@ public class StaffDAO implements DAOInterface<Staff> {
 
             result = pst.executeUpdate();
 
-            System.out.println("There is " + result + " deleted");
+            if (result != 0) {
+                System.out.println("Delete successfully!!!");
+            }
 
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {

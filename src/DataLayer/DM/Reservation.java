@@ -69,6 +69,10 @@ public class Reservation {
         this.BookingTime = BookingTime;
         this.NumberOfPeople = NumberOfPeople;
     }
+
+    public Reservation(String Phone) {
+        this.Phone = Phone;
+    }
     public int getReservationID() {
         return ReservationID;
     }

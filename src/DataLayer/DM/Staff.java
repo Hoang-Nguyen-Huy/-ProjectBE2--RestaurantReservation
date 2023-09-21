@@ -20,6 +20,11 @@ public class Staff {
         this.StaffPhone = StaffPhone;
         this.StaffRole = StaffRole;
     }
+
+    public Staff(int StaffID) {
+        this.StaffID = StaffID;
+    }
+
     public int getStaffID() {
         return StaffID;
     }
