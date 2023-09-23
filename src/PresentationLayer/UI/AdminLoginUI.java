@@ -2,6 +2,8 @@ package PresentationLayer.UI;
 
 import BusinessLogicLayer.AdminLoginLogic;
 import BusinessLogicLayer.AdminLoginValidation;
+import BusinessLogicLayer.AdminMenuLogic;
+
 import java.util.Scanner;
 
 public class AdminLoginUI {
@@ -24,22 +26,32 @@ public class AdminLoginUI {
         return Integer.parseInt(choices);
     }
 
-    public void displayLoginOwner(){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Username: ");
-        String username = sc.nextLine();
-        System.out.print("Password: ");
-        String password = sc.nextLine();
+    public boolean displayLoginOwner(){
+        boolean isLogin = true;
+        while(isLogin) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Username: ");
+            String username = sc.nextLine();
+            System.out.print("Password: ");
+            String password = sc.nextLine();
 
-        if (AdminLoginValidation.isUsernameValid(username) && AdminLoginValidation.isPasswordValid(password)) {
-            AdminLoginLogic adminLoginLogic = new AdminLoginLogic();
-            if (adminLoginLogic.loginOwner(username, password)) {
-                System.out.println("Login successful!");
+            if (AdminLoginValidation.isUsernameValid(username) && AdminLoginValidation.isPasswordValid(password)) {
+                AdminLoginLogic adminLoginLogic = new AdminLoginLogic();
+                if (adminLoginLogic.loginOwner(username, password)) {
+                    System.out.println("Login successful!");
+                    isLogin = false;
+                    AdminMenuLogic adminMenuLogic = new AdminMenuLogic();
+                    adminMenuLogic.runAdminMenu();
+                } else {
+                    System.out.println("Login failed. Please try again.");
+                    isLogin = true;
+                }
             } else {
-                System.out.println("Login failed. Please try again.");
+                System.out.println("Invalid username or password format. Please check and try again.");
+                isLogin = true;
             }
-        } else {
-            System.out.println("Invalid username or password format. Please check and try again.");
+
         }
+        return isLogin;
     }
 }

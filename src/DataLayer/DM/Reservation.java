@@ -14,12 +14,12 @@ public class Reservation {
     private int NumberOfPeople;
     private String Requirement;
 
-    private Customer customer;
+    private int CustomerID;
 
     public Reservation () {
 
     }
-    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, Customer customer) {
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
         this.ReservationID = ReservationID;
         this.FullName = FullName;
         this.Email = Email;
@@ -28,11 +28,10 @@ public class Reservation {
         this.BookingTime = BookingTime;
         this.NumberOfPeople = NumberOfPeople;
         this.Requirement = Requirement;
-        this.customer = customer;
+        this.CustomerID = CustomerID;
     }
 
-    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement) {
-        this.ReservationID = ReservationID;
+    public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
         this.FullName = FullName;
         this.Email = Email;
         this.Phone = Phone;
@@ -40,16 +39,9 @@ public class Reservation {
         this.BookingTime = BookingTime;
         this.NumberOfPeople = NumberOfPeople;
         this.Requirement = Requirement;
+        this.CustomerID = CustomerID;
     }
-    public Reservation( String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, Customer customer) {
-        this.FullName = FullName;
-        this.Email = Email;
-        this.Phone = Phone;
-        this.BookingDate = BookingDate;
-        this.BookingTime = BookingTime;
-        this.NumberOfPeople = NumberOfPeople;
-        this.customer = customer;
-    }
+
 
     public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement) {
         this.FullName = FullName;
@@ -59,15 +51,6 @@ public class Reservation {
         this.BookingTime = BookingTime;
         this.NumberOfPeople = NumberOfPeople;
         this.Requirement = Requirement;
-    }
-
-    public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople) {
-        this.FullName = FullName;
-        this.Email = Email;
-        this.Phone = Phone;
-        this.BookingDate = BookingDate;
-        this.BookingTime = BookingTime;
-        this.NumberOfPeople = NumberOfPeople;
     }
 
     public Reservation(String Phone) {
@@ -105,8 +88,8 @@ public class Reservation {
         return Requirement;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public int getCustomerID() {
+        return CustomerID;
     }
 
     public void setReservationID(int ReservationID) {
@@ -141,8 +124,8 @@ public class Reservation {
         this.Requirement = Requirement;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerID(int CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
     @Override
@@ -156,7 +139,7 @@ public class Reservation {
                 ", BookingTime=" + BookingTime +
                 ", NumberOfPeople=" + NumberOfPeople +
                 ", Requirement='" + Requirement + '\'' +
-                ", customer=" + customer +
+                ", CustomerID=" + CustomerID +
                 '}';
     }
 }
