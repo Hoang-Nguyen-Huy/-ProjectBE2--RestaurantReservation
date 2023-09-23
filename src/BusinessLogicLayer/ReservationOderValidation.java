@@ -29,17 +29,23 @@ public class ReservationOderValidation {
                     System.out.println("These symbols ('_', '.', '-') cannot be consecutively");
                     return false;
                 }
-//              Note: có thể bỏ việc khoảng trắng :>
+                /*         Note: có thể bỏ việc khoảng trắng :>
                 if (Character.isWhitespace(c)) {
                     System.out.println("Username cannot contain whitespace");
                     return false;
                 }
+
+                 */
             }
             currentPosition++;
         }
 
         if (username.matches("[0-9-]+")){
             System.out.println("Username can not contain digits");
+            return false;
+        }
+        if (!username.matches("[A-Za-z]+")){
+            System.out.println("Username only contain chacracters");
             return false;
         }
 
@@ -91,9 +97,21 @@ public class ReservationOderValidation {
         return true;
     }
 
-    public static boolean isValidNumberOfPeople(int NumberOfPeople){
-        if (NumberOfPeople<1){
+    public static boolean isValidNumberOfPeople(String NumberOfPeople){
+        CustomerLogic customerLogic = new CustomerLogic();
+        if(!customerLogic.checkInt(NumberOfPeople)) {
+            return false;
+        }
+        int noPeople = Integer.parseInt(NumberOfPeople);
+        if (noPeople<1){
             System.out.println("Number Of People mus be larger than 0");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isValidRequirement(String requirement) {
+        if (requirement.length() > 1000) {
             return false;
         }
         return true;

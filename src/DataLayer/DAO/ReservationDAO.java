@@ -18,25 +18,25 @@ public class ReservationDAO implements DAOInterface<Reservation>{
         try {
             Connection con = JDBCUtil.getConnection();
 
-            String sql = "INSERT INTO reservation(ReservationID, FullName, Email, Phone, BookingDate, BookingTime, NumberOfPeople, Requirement)" +
+            String sql = "INSERT INTO reservation(FullName, Email, Phone, BookingDate, BookingTime, NumberOfPeople, Requirement, CustomerID)" +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
-            pst.setInt(1, reservation.getReservationID());
-            pst.setString(2, reservation.getFullName());
-            pst.setString(3, reservation.getEmail());
-            pst.setString(4, reservation.getPhone());
-            pst.setDate(5, reservation.getBookingDate());
-            pst.setTime(6, reservation.getBookingTime());
-            pst.setInt(7, reservation.getNumberOfPeople());
-            pst.setString(8, reservation.getRequirement());
+            pst.setString(1, reservation.getFullName());
+            pst.setString(2, reservation.getEmail());
+            pst.setString(3, reservation.getPhone());
+            pst.setDate(4, reservation.getBookingDate());
+            pst.setTime(5, reservation.getBookingTime());
+            pst.setInt(6, reservation.getNumberOfPeople());
+            pst.setString(7, reservation.getRequirement());
+            pst.setInt(8, reservation.getCustomerID());
 
 
 
             result = pst.executeUpdate();
 
-            System.out.println("There is " + result + " change");
+            System.out.println("Reservation was accepted!!!");
 
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class ReservationDAO implements DAOInterface<Reservation>{
         try {
             Connection con = JDBCUtil.getConnection();
 
-            String sql = "SELECT * FROM resevation";
+            String sql = "SELECT * FROM reservation";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -130,8 +130,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 Time BookingTime = rs.getTime("BookingTime");
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
+                int customeriD = rs.getInt("CustomerID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement);
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customeriD);
 
 
                 result.add(reservation);
@@ -168,8 +169,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 Time BookingTime = rs.getTime("BookingTime");
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
+                int customerID = rs.getInt("CustomerID");
 
-                result = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement);
+                result = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID);
             }
 
             JDBCUtil.closeConnection(con);
@@ -202,8 +204,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 Time BookingTime = rs.getTime("BookingTime");
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
+                int customerID = rs.getInt("CustomerID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement);
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID);
 
 
                 result.add(reservation);
@@ -239,10 +242,46 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 Time BookingTime = rs.getTime("BookingTime");
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
+                int customerID = rs.getInt("CustomerID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement);
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID);
 
                 result.add(reservation);
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean checkAvailableTable(Reservation reservation) {
+        boolean result = false;
+        int count = 0;
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "SELECT COUNT(*)" +
+                    " FROM tableofrestaurant " +
+                    " WHERE capacity >= ? AND tablestatus = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setInt(1, reservation.getNumberOfPeople());
+            pst.setString(2, "available");
+
+            ResultSet rs = pst.executeQuery();
+
+
+            if(rs.next()) {
+                count = rs.getInt(1);
+            }
+
+            if (count < 1) {
+                result = false;
+            } else if (count >= 1) {
+                result = true;
             }
 
             JDBCUtil.closeConnection(con);

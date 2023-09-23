@@ -2,6 +2,7 @@ package DataLayer.DAO;
 
 import DataLayer.DM.Admin;
 import DataLayer.DM.Customer;
+import jdk.nashorn.internal.scripts.JD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,8 +32,6 @@ public class CustomerDAO implements DAOInterface<Customer> {
             pst.setString(4, customer.getCustomerPhone());
 
             result = pst.executeUpdate();
-
-            System.out.println("There is " + result + " change");
 
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -180,6 +179,33 @@ public class CustomerDAO implements DAOInterface<Customer> {
                 Customer customer1 = new Customer(id, name, email, phone);
 
                 result.add(customer1);
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int selectCustomerIDByPhone(Customer customer) {
+        int result = 0;
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "SELECT CustomerID FROM customer" +
+                    " WHERE CustomerName = ? AND CustomerEmail = ? AND CustomerPhone = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, customer.getCustomerName());
+            pst.setString(2, customer.getCustomerEmail());
+            pst.setString(3, customer.getCustomerPhone());
+
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                result = rs.getInt(1);
             }
 
             JDBCUtil.closeConnection(con);

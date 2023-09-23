@@ -1,12 +1,15 @@
 package BusinessLogicLayer;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class CustomerValidation {
     public static boolean isValidUsername (String username){
         if(username.isEmpty()){
             System.out.println("Full name can not be empty!");
             return false;
         }
-
+        /*
         char[] usernameChar = username.trim().toCharArray();
         int usernameCharLen = usernameChar.length;
         int currentPosition = 0;
@@ -27,19 +30,29 @@ public class CustomerValidation {
                     System.out.println("These symbols ('_', '.', '-') cannot be consecutively");
                     return false;
                 }
-//              Note: có thể bỏ việc khoảng trắng :>
+                //      Note: có thể bỏ việc khoảng trắng :>
                 if (Character.isWhitespace(c)) {
                     System.out.println("Username cannot contain whitespace");
                     return false;
                 }
+
+
             }
             currentPosition++;
         }
+        */
 
         if (username.matches("[0-9-]+")){
             System.out.println("Username can not contain digits");
             return false;
         }
+        /*
+        if (!username.matches("[A-Za-z]+")){
+            System.out.println("Username only contain chacracters");
+            return false;
+        }
+
+         */
 
         return true;
     }
@@ -87,5 +100,29 @@ public class CustomerValidation {
             return false;
         }
         return true;
+    }
+
+    public static boolean isValidDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+
+    }
+
+    public static boolean isValidTime(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        sdf.setLenient(false);
+
+        try {
+            sdf.parse(time);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 }
