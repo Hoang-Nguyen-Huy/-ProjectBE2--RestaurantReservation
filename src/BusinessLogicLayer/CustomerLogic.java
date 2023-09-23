@@ -3,6 +3,7 @@ package BusinessLogicLayer;
 import DataLayer.DAO.CustomerDAO;
 import DataLayer.DAO.DishDAO;
 import DataLayer.DAO.ReservationDAO;
+import DataLayer.DAO.TableDAO;
 import DataLayer.DM.Customer;
 import DataLayer.DM.Dish;
 import DataLayer.DM.Reservation;
@@ -172,7 +173,7 @@ public class CustomerLogic {
             Reservation reservation1 = new Reservation(fullName, email, phone, Date.valueOf(bookingDate), Time.valueOf(bookingTime), numberOfPeople, requirement, customerID);
             ReservationDAO.getInstance().insert(reservation1); // nhập đơn đặt bàn vào sql
 
-
+            TableDAO.getInstance().updateTableAfterReservation(numberOfPeople);
 
         } else {
             System.out.println("There are no available table left!!!!");

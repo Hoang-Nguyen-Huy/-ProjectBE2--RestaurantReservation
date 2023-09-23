@@ -318,4 +318,34 @@ public class TableDAO implements DAOInterface<TableOfRestaurant>{
         }
         return result;
     }
+
+    public int updateTableAfterReservation(int NoPeople) {
+        int result = 0;
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "UPDATE tableofrestaurant tr" +
+                    " JOIN (" +
+                    " SELECT TableID, Capacity" +
+                    " FROM tableofrestaurant" +
+                    " WHERE Capacity >= " + NoPeople +
+                    " AND TableStatus = 'available' " +
+                    " ORDER BY Capacity ASC" +
+                    " LIMIT 1" +
+                    " ) t ON tr.TableID = t.TableID " +
+                    " SET tr.TableStatus = 'unavailable'";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            result = pst.executeUpdate();
+
+            if (result != 0) {
+                System.out.println(result + " table has been reserved for you");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
