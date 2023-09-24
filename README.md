@@ -5,7 +5,7 @@ A restaurant reservation system is a software solution to help your customers ma
 ## Actors
 
 - **Restaurant Owner**: Manages restaurant details, tables, and reservation requests, dishes, staff.
-- **Customer**: Requests reservations and view menu.
+- **Customer**: Requests reservations and views menu.
 
 ## Major Features
 
@@ -16,16 +16,16 @@ A restaurant reservation system is a software solution to help your customers ma
    - Restaurant owners can update and manage restaurant-specific information.
 
 3. **Table Management**:
-   - Restaurant owners can manage tables, including the number of people each table can accommodate, table types.
+   - Restaurant owners can manage tables, including the number of people each table can accommodate, and table types.
 
 4. **Reservation Requests**:
-   - Customers can create reservation requests specifying the number of information of customers, number of people, type table, date, time, requirment.
+   - Customers can create reservation requests specifying the number of information of customers, number of people, type table, date, time, and requirements.
 
 5. **View Reservation Requests**:
    - Both restaurant owners the details about reservation requests.
 
 6. **Confirm/Reject Reservations**:
-   - System can auto confirm or reject customer reservation requests based on table availability and other factors.
+   - System can auto-confirm or reject customer reservation requests based on table availability and other factors.
 
 ## Getting Started
 
@@ -37,7 +37,7 @@ To get started with the Restaurant Reservation System, follow these steps:
    https://github.com/Hoang-Nguyen-Huy/-ProjectBE2--RestaurantReservation.git
    ```
 
-2. Set database (throung MySQL).
+2. Set database (through MySQL).
 
 3. Run the application and start making reservations!
 
