@@ -13,7 +13,7 @@ public class JDBCUtil {
 
             String url = "jdbc:mySQL://localhost:3306/restaurantreservation";
             String username = "root";
-            String password = "13022014";
+            String password = "Thanhtri291104@";
 
             c = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {

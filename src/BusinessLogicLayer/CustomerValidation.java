@@ -112,7 +112,13 @@ public class CustomerValidation {
     }
 
     public static boolean isValidRequirement(String requirement) {
-        if (requirement.length() > 1000) {
+
+        if (requirement.isEmpty()) {
+            System.out.println("Requirement of people can not be empty!");
+            return false;
+        }
+
+        if (requirement.length() > 250) {
             System.out.println("Your requirement is too long!!!");
             return false;
         }
