@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class MainMenuUI {
     public void display () {
+        System.out.println("-----------------------------");
+        System.out.println("Welcome to the Application!");
+        System.out.println("You are:");
         System.out.println("[1] Customer");
         System.out.println("[2] Restaurant Owner");
         System.out.println("[0] Exit");
@@ -18,6 +21,7 @@ public class MainMenuUI {
 
         while(!adminMenuLogic.checkInt(choices)) {
             System.out.println("Please enter an integer number!!!");
+            display();
             System.out.print("Choose a number: ");
             choices = sc.nextLine();
         }

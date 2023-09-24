@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class AdminMenuUI {
     public void display () {
+        System.out.println("---------OWNER'S MENU----------");
         System.out.println("[1] Staff");
         System.out.println("[2] Reservation");
         System.out.println("[3] Table");
@@ -27,6 +28,7 @@ public class AdminMenuUI {
         }
         return Integer.parseInt(choices);
     }
+
     public String EnterInfor () {
         Scanner sc = new Scanner(System.in);
         String infor = sc.nextLine();
@@ -47,6 +49,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuStaff() {
+        System.out.println("---------STAFF'S MENU----------");
         System.out.println("[1] Add more Staffs");
         System.out.println("[2] Show all Staffs");
         System.out.println("[3] Update Staffs information");
@@ -55,6 +58,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuForUpdatingStaffs() {
+        System.out.println("---------STAFF'S CRUD----------");
         System.out.println("[1] Update name");
         System.out.println("[2] Update phone");
         System.out.println("[3] Update role");
@@ -63,6 +67,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuReservation() {
+        System.out.println("---------MENU RESERVATION----------");
         System.out.println("[1] Show All Reservations");
         System.out.println("[2] Show Reservations By Phone");
         System.out.println("[3] Delete Reservations By Phone");
@@ -70,6 +75,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuTable() {
+        System.out.println("---------MENU TABLE----------");
         System.out.println("[1] Add more Tables");
         System.out.println("[2] Show Tables");
         System.out.println("[3] Update Tables information");
@@ -78,6 +84,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuShowTable() {
+        System.out.println("---------SHOW TABLE----------");
         System.out.println("[1] Show all Tables");
         System.out.println("[2] Show Available Tables");
         System.out.println("[3] Show Unavailable Tables");
@@ -85,6 +92,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuUpdateTable() {
+        System.out.println("---------UPDATE TABLE----------");
         System.out.println("[1] Update capacity");
         System.out.println("[2] Update type");
         System.out.println("[3] Update both");
@@ -92,6 +100,7 @@ public class AdminMenuUI {
     }
 
     public void displayMenuDish() {
+        System.out.println("---------MENU DISH----------");
         System.out.println("[1] Add more Dish");
         System.out.println("[2] Show all Dish");
         System.out.println("[3] Update Dish information");
@@ -100,6 +109,7 @@ public class AdminMenuUI {
     }
 
     public void displayShowDish() {
+        System.out.println("---------SHOW DISH----------");
         System.out.println("[1] Show all Dish");
         System.out.println("[2] Show all Dish with increasing PRICE");
         System.out.println("[3] Show all Dish with decreasing PRICE");
@@ -109,6 +119,7 @@ public class AdminMenuUI {
     }
 
     public void displayUpdateDish() {
+        System.out.println("---------UPDATE DISH----------");
         System.out.println("[1] Update all Dish information");
         System.out.println("[2] Update name");
         System.out.println("[3] Update price");
@@ -117,6 +128,7 @@ public class AdminMenuUI {
         System.out.println("[0] Go back");
     }
     public void displayMenuCustomer() {
+        System.out.println("---------MENU CUSTOMER----------");
         System.out.println("[1] Show All Customers");
         System.out.println("[2] Delete Customers");
         System.out.println("[0] Go Back");

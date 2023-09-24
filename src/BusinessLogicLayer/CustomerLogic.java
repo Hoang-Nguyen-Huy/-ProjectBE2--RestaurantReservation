@@ -19,13 +19,13 @@ import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 public class CustomerLogic {
     Scanner sc = new Scanner(System.in);
     CustomerMenuUI ui = new CustomerMenuUI();
-    private String fullName;
-    private String email;
-    private String phone;
-    private String bookingDate;
-    private String bookingTime;
-    private String noPeople;
-    private String requirement;
+    private String fullName = "";
+    private String email = "";
+    private String phone = "";
+    private String bookingDate = "";
+    private String bookingTime = "";
+    private String noPeople = "";
+    private String requirement = "";
 
 
     public boolean checkInt(String choices) {
@@ -112,62 +112,41 @@ public class CustomerLogic {
         }
     }
     public void EnterCustomerInfo() {
-        System.out.print("Enter full name: ");
-        fullName = sc.nextLine();
-        while(!CustomerValidation.isValidUsername(fullName)) {
-            System.out.println("Please enter the valid name!!!");
+        do{
             System.out.print("Enter full name: ");
             fullName = sc.nextLine();
-        }
+        }while(!CustomerValidation.isValidUsername(fullName));
 
-        System.out.print("Enter email: ");
-        email = sc.next();
-        while(!CustomerValidation.isValidEmail(email)) {
-            System.out.println("Please enter the valid email!!!");
+        do{
             System.out.print("Enter email: ");
-            email = sc.next();
-        }
+            email = sc.nextLine();
+        }while(!CustomerValidation.isValidEmail(email));
 
-        System.out.print("Enter phone number: ");
-        phone = sc.next();
-        while(!CustomerValidation.isValidPhone(phone)) {
-            System.out.println("Please enter the valid phone number!!!");
-            System.out.print("Enter phone number: ");
-            phone = sc.next();
-        }
+        do{
+            System.out.print("Enter phone: ");
+            phone = sc.nextLine();
+        }while(!CustomerValidation.isValidPhone(phone));
 
-        System.out.print("Enter date (YYYY-MM-DD): ");
-        bookingDate = sc.next();
-        while(!CustomerValidation.isValidDate(bookingDate)) {
-            System.out.println("Please enter the valid booking date!!!");
+        do{
             System.out.print("Enter date (YYYY-MM-DD): ");
-            bookingDate = sc.next();
-        }
+            bookingDate = sc.nextLine();
+        }while(!CustomerValidation.isValidDate(bookingDate));
 
-        System.out.print("Enter time (HH:MM:SS): ");
-        bookingTime = sc.next();
-        while (!CustomerValidation.isValidTime(bookingTime)) {
-            System.out.println("Please enter the valid booking time!!!");
+        do{
             System.out.print("Enter time (HH:MM:SS): ");
-            bookingTime = sc.next();
-        }
+            bookingTime = sc.nextLine();
+        }while(!CustomerValidation.isValidTime(bookingTime));
 
-        System.out.print("Enter number of people: ");
-        noPeople = sc.next();
-        while(!ReservationOderValidation.isValidNumberOfPeople(noPeople)) {
-            System.out.println("Please enter the valid number of people: ");
+        do{
             System.out.print("Enter number of people: ");
-            noPeople = sc.next();
-        }
+            noPeople = sc.nextLine();
+        }while(!CustomerValidation.isValidNoPeople(noPeople));
         int numberOfPeople = Integer.parseInt(noPeople);
 
-        System.out.print("Enter requirement: ");
-        requirement = sc.next();
-        while(!ReservationOderValidation.isValidRequirement(requirement)) {
-            System.out.println("Your requirement is too long!!!");
-            System.out.println("Enter requirement: ");
+        do{
+            System.out.print("Enter requirement: ");
             requirement = sc.nextLine();
-        }
+        }while(!CustomerValidation.isValidRequirement(requirement));
 
         Reservation reservation = new Reservation(fullName, email, phone, Date.valueOf(bookingDate), Time.valueOf(bookingTime), numberOfPeople, requirement);
         Customer customer = new Customer(fullName, email, phone);
