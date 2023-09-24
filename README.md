@@ -43,10 +43,10 @@ To get started with the Restaurant Reservation System, follow these steps:
 
 ## Technologies Used
 
+- Console Application
 - Java: Backend logic
 - MySQL: Database for storing reservation data
 - JDBC: Database connection
-- Console Application
 - Git: Version control for collaboration
 
 ## Contributors
