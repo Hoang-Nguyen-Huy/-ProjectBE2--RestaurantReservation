@@ -151,15 +151,17 @@ public class CustomerLogic {
         Reservation reservation = new Reservation(fullName, email, phone, Date.valueOf(bookingDate), Time.valueOf(bookingTime), numberOfPeople, requirement);
         Customer customer = new Customer(fullName, email, phone);
 
-        if (ReservationDAO.getInstance().checkAvailableTable(reservation)) { // kiểm tra số lượng bàn available
+        int tableid = TableDAO.getInstance().selectTableIDByCapacity(reservation, ReservationDAO.getInstance().checkReservation(reservation));
+
+        if (tableid != 0) { // kiểm tra bàn có id đã bị đặt từ trước hay chưa
             CustomerDAO.getInstance().insert(customer);  // nhập thông tin người dùng vào sql
             System.out.println("You have successfully booked a table!!!!");
 
             int customerID = CustomerDAO.getInstance().selectCustomerIDByPhone(customer);  // lấy customerID sau khi thông tin người dùng được nhập vào sql
-            Reservation reservation1 = new Reservation(fullName, email, phone, Date.valueOf(bookingDate), Time.valueOf(bookingTime), numberOfPeople, requirement, customerID);
+            Reservation reservation1 = new Reservation(fullName, email, phone, Date.valueOf(bookingDate), Time.valueOf(bookingTime), numberOfPeople, requirement, customerID, tableid);
             ReservationDAO.getInstance().insert(reservation1); // nhập đơn đặt bàn vào sql
 
-            TableDAO.getInstance().updateTableAfterReservation(numberOfPeople);
+            //TableDAO.getInstance().updateTableAfterReservation(numberOfPeople);
 
         } else {
             System.out.println("There are no available table left!!!!");

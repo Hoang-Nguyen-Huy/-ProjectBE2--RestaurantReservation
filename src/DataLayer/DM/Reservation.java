@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
-
 public class Reservation {
     private int ReservationID;
     private String FullName;
@@ -14,7 +13,6 @@ public class Reservation {
     private Time BookingTime;
     private int NumberOfPeople;
     private String Requirement;
-    
 
     private int CustomerID;
 
@@ -23,8 +21,7 @@ public class Reservation {
     public Reservation () {
 
     }
-
-    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID, int TableID) {
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID, int TaleID) {
         this.ReservationID = ReservationID;
         this.FullName = FullName;
         this.Email = Email;
@@ -34,7 +31,30 @@ public class Reservation {
         this.NumberOfPeople = NumberOfPeople;
         this.Requirement = Requirement;
         this.CustomerID = CustomerID;
-        this.TableID = TableID;
+        this.TableID = TaleID;
+    }
+    public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID, int TaleID) {
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.Requirement = Requirement;
+        this.CustomerID = CustomerID;
+        this.TableID = TaleID;
+    }
+
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
+        this.ReservationID = ReservationID;
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.Requirement = Requirement;
+        this.CustomerID = CustomerID;
     }
 
     public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
@@ -98,6 +118,10 @@ public class Reservation {
         return CustomerID;
     }
 
+    public int getTableID() {
+        return TableID;
+    }
+
     public void setReservationID(int ReservationID) {
         this.ReservationID = ReservationID;
     }
@@ -134,19 +158,23 @@ public class Reservation {
         this.CustomerID = CustomerID;
     }
 
+    public void setTableID(int TableID) {
+        this.TableID = TableID;
+    }
+
     @Override
     public String toString() {
-        return ReservationID + " | " + CustomerID + " | " + FullName + " | " + Email + " | " + Phone + " | " + BookingDate + " | " + BookingTime + " | " + NumberOfPeople + " | " + (Requirement.length() > 20 ? Requirement.substring(0, 20) : Requirement) + " | " ;
-        // return "Reservation{" +
-        //         "ReservationID=" + ReservationID +
-        //         ", FullName='" + FullName + '\'' +
-        //         ", Email='" + Email + '\'' +
-        //         ", Phone='" + Phone + '\'' +
-        //         ", BookingDate=" + BookingDate +
-        //         ", BookingTime=" + BookingTime +
-        //         ", NumberOfPeople=" + NumberOfPeople +
-        //         ", Requirement='" + Requirement + '\'' +
-        //         ", CustomerID=" + CustomerID +
-        //         '}';
+        return "Reservation{" +
+                "ReservationID=" + ReservationID +
+                ", FullName='" + FullName + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Phone='" + Phone + '\'' +
+                ", BookingDate=" + BookingDate +
+                ", BookingTime=" + BookingTime +
+                ", NumberOfPeople=" + NumberOfPeople +
+                ", Requirement='" + Requirement + '\'' +
+                ", CustomerID=" + CustomerID +
+                ", TableID=" + TableID +
+                '}';
     }
 }
