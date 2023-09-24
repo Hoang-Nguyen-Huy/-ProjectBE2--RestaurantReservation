@@ -34,6 +34,13 @@ CREATE TABLE restaurant (
     FOREIGN KEY (AdminID) REFERENCES Admin (AdminID)
 );
 
+CREATE TABLE tableOfRestaurant (
+	TableID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+    Capacity INT NOT NULL, 
+    TableType VARCHAR(50) NOT NULL, 
+    TableStatus VARCHAR(50) NOT NULL DEFAULT'available'
+);
+
 CREATE TABLE reservation (
 	ReservationID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     FullName VARCHAR(50) NOT NULL, 
@@ -42,61 +49,17 @@ CREATE TABLE reservation (
     BookingDate DATE NOT NULL,
     BookingTime TIME NOT NULL,
     NumberOfPeople INT NOT NULL, 
-    Requirement VARCHAR(1024),
+    Requirement VARCHAR(1024) DEFAULT'no',
     CustomerID INT NOT NULL, 
     TableID INT NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID),
     FOREIGN KEY (TableID) REFERENCES tableofrestaurant (TableID)
 );
 
-CREATE TABLE tableOfRestaurant (
-	TableID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-    Capacity INT NOT NULL, 
-    TableType VARCHAR(50) NOT NULL, 
-    TableStatus VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE tableReservation (
-	tableReservationID INT PRIMARY KEY, 
-    TableID INT NOT NULL, 
-    ReservationID INT NOT NULL, 
-    FOREIGN KEY (TableID) REFERENCES tableofrestaurant (TableID), 
-    FOREIGN KEY (ReservationID) REFERENCES Reservation (ReservationID)
-);
-
 CREATE TABLE Dish (
 	DishID 	INT PRIMARY KEY AUTO_INCREMENT, 
     DishName VARCHAR(512) NOT NULL, 
     DishPrice FLOAT NOT NULL, 
-    DishDescription VARCHAR(1024) NOT NULL, 
+    DishDescription VARCHAR(1024) NOT NULL DEFAULT'no', 
     DishRate FLOAT DEFAULT 0
 );
-
-CREATE TABLE Bill (
-	BillID INT PRIMARY KEY AUTO_INCREMENT, 
-    DateTimeOut DATETIME NOT NULL, 
-    totalPrice FLOAT NOT NULL, 
-    ReservationID INT NOT NULL, 
-    DishID INT NOT NULL, 
-    FOREIGN KEY (DishID) REFERENCES Dish (DishID),
-    FOREIGN KEY (ReservationID) REFERENCES Reservation (ReservationID)
-);
-
-CREATE TABLE BillDish (
-	BillDishID INT PRIMARY KEY AUTO_INCREMENT, 
-    DishID INT NOT NULL, 
-    BillID INT NOT NULL, 
-    FOREIGN KEY (DishID) REFERENCES Dish (DishID), 
-    FOREIGN KEY (BillID) REFERENCES Bill (BillID)
-);
-
-CREATE TABLE payment (
-	PaymentID INT PRIMARY KEY AUTO_INCREMENT, 
-    amount FLOAT NOT NULL, 
-    DateTimePay DATETIME NOT NULL, 
-    method VARCHAR(512) NOT NULL, 
-    BillID INT NOT NULL, 
-    FOREIGN KEY (BillID) REFERENCES Bill (BillID)
-);
-
-

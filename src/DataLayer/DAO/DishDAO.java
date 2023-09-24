@@ -1,5 +1,6 @@
 package DataLayer.DAO;
 
+import BusinessLogicLayer.AdminValidation;
 import DataLayer.DM.Admin;
 import DataLayer.DM.Dish;
 import PresentationLayer.UI.AdminMenuUI;
@@ -9,9 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DishDAO implements DAOInterface<Dish>{
     AdminMenuUI ui = new AdminMenuUI();
+    Scanner sc = new Scanner(System.in);
     public static DishDAO getInstance() {
         return new DishDAO();
     }
@@ -27,7 +30,7 @@ public class DishDAO implements DAOInterface<Dish>{
 
             PreparedStatement pst = con.prepareStatement(sql);
 
-            pst.setString(1, dish.getDishName());
+            pst.setString(1,dish.getDishName());
             pst.setDouble(2, dish.getPrice());
             pst.setString(3, dish.getDescription());
             pst.setDouble(4, dish.getDishRate());
@@ -82,9 +85,12 @@ public class DishDAO implements DAOInterface<Dish>{
 
     public int updateName(Dish dish) {
         int result = 0;
+        String newName = "";
+        do{
+            System.out.print("Enter new name dish: ");
+            newName = sc.nextLine();
+        }while (!AdminValidation.isValidName(newName));
 
-        System.out.print("Enter the new name: ");
-        String newName = ui.EnterInfor();
         try {
             Connection con = JDBCUtil.getConnection();
 
@@ -114,8 +120,13 @@ public class DishDAO implements DAOInterface<Dish>{
     public int updatePrice(Dish dish) {
         int result = 0;
 
-        System.out.print("Enter the new price: ");
-        double newPrice = ui.parseDouble();
+        String sPrice = "";
+        do{
+            System.out.print("Enter new price: ");
+            sPrice = sc.nextLine();
+        }while (!AdminValidation.isValidDouble(sPrice));
+        double newPrice = Double.parseDouble(sPrice);
+
         try {
             Connection con = JDBCUtil.getConnection();
 
@@ -144,9 +155,13 @@ public class DishDAO implements DAOInterface<Dish>{
 
     public int updateDescription(Dish dish) {
         int result = 0;
+        String newDescription = "";
 
-        System.out.print("Enter the new description: ");
-        String newDescription = ui.EnterInfor();
+        do{
+            System.out.print("Enter the new description: ");
+            newDescription = sc.nextLine();
+        }while (!AdminValidation.isValidDescription(newDescription));
+
         try {
             Connection con = JDBCUtil.getConnection();
 
@@ -175,9 +190,13 @@ public class DishDAO implements DAOInterface<Dish>{
 
     public int updateRate(Dish dish) {
         int result = 0;
+        String sRate = "";
+        do{
+            System.out.print("Enter new rate: ");
+            sRate = sc.nextLine();
+        }while (!AdminValidation.isValidDouble(sRate));
+        double newRate = Double.parseDouble(sRate);
 
-        System.out.print("Enter the new rate: ");
-        double newRate = ui.parseDouble();
         try {
             Connection con = JDBCUtil.getConnection();
 

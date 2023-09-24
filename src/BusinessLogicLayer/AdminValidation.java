@@ -63,7 +63,7 @@ public class AdminValidation {
     private static boolean isSupportedRole(String role) {
         String[] supportedRoles = new String[]{"Manager","Chef","Waitstaff"};
         for (String supportedString : supportedRoles) {
-            if (supportedString == role)
+            if (supportedString.equals(role))
                 return true;
         }
         return false;
@@ -103,7 +103,7 @@ public class AdminValidation {
     private static boolean isSupportedTypeOfTable(String type) {
         String[] supportedTypes = new String[]{"Standard","Round","Outdoor"};
         for (String supportedString : supportedTypes) {
-            if (supportedString == type)
+            if (supportedString.equals(type))
                 return true;
         }
         return false;
@@ -126,6 +126,20 @@ public class AdminValidation {
             return false;
         }
 
+        return true;
+    }
+
+    public static boolean isValidDescription(String description) {
+
+        if(description.isEmpty()){
+            System.out.println("Description can not be empty!");
+            return false;
+        }
+
+        if (description.length() > 1000) {
+            System.out.println("Your description is too long!!!");
+            return false;
+        }
         return true;
     }
 
