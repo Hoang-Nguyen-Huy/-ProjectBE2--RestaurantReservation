@@ -72,12 +72,13 @@ public class Dish {
 
     @Override
     public String toString() {
-        return "Dish{" +
-                "DishID=" + DishID +
-                ", DishName='" + DishName + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", DishRate=" + DishRate +
-                '}';
+        return DishID + " | " + DishName + " | " + price + " | " + (description.length() > 20 ? description.substring(0, 20) : description) + " | " ;
+        // return "Dish{" +
+        //         "DishID=" + DishID +
+        //         ", DishName='" + DishName + '\'' +
+        //         ", price=" + price +
+        //         ", description='" + description + '\'' +
+        //         ", DishRate=" + DishRate +
+        //         '}';
     }
 }

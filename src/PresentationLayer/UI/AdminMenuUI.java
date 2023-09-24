@@ -65,6 +65,7 @@ public class AdminMenuUI {
     public void displayMenuReservation() {
         System.out.println("[1] Show All Reservations");
         System.out.println("[2] Show Reservations By Phone");
+        System.out.println("[3] Delete Reservations By Phone");
         System.out.println("[0] Go Back");
     }
 
