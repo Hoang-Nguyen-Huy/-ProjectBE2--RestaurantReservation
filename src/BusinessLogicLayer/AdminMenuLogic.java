@@ -21,7 +21,7 @@ public class AdminMenuLogic {
         }
     }
 
-    public void runAdminMenu() {
+    public void runAdminMenu()  {
         boolean isRunning = true;
         while(isRunning) {
             ui.display();

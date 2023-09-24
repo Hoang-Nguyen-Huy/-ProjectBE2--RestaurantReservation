@@ -16,9 +16,35 @@ public class Reservation {
 
     private int CustomerID;
 
+    private int TableID;
+
     public Reservation () {
 
     }
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID, int TaleID) {
+        this.ReservationID = ReservationID;
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.Requirement = Requirement;
+        this.CustomerID = CustomerID;
+        this.TableID = TaleID;
+    }
+    public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID, int TaleID) {
+        this.FullName = FullName;
+        this.Email = Email;
+        this.Phone = Phone;
+        this.BookingDate = BookingDate;
+        this.BookingTime = BookingTime;
+        this.NumberOfPeople = NumberOfPeople;
+        this.Requirement = Requirement;
+        this.CustomerID = CustomerID;
+        this.TableID = TaleID;
+    }
+
     public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
         this.ReservationID = ReservationID;
         this.FullName = FullName;
@@ -92,6 +118,10 @@ public class Reservation {
         return CustomerID;
     }
 
+    public int getTableID() {
+        return TableID;
+    }
+
     public void setReservationID(int ReservationID) {
         this.ReservationID = ReservationID;
     }
@@ -128,6 +158,10 @@ public class Reservation {
         this.CustomerID = CustomerID;
     }
 
+    public void setTableID(int TableID) {
+        this.TableID = TableID;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
@@ -140,6 +174,7 @@ public class Reservation {
                 ", NumberOfPeople=" + NumberOfPeople +
                 ", Requirement='" + Requirement + '\'' +
                 ", CustomerID=" + CustomerID +
+                ", TableID=" + TableID +
                 '}';
     }
 }

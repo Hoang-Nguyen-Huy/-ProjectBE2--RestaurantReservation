@@ -2,8 +2,11 @@ package DataLayer.DAO;
 
 import DataLayer.DM.Admin;
 import DataLayer.DM.Reservation;
+import jdk.nashorn.internal.scripts.JD;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class ReservationDAO implements DAOInterface<Reservation>{
@@ -18,8 +21,8 @@ public class ReservationDAO implements DAOInterface<Reservation>{
         try {
             Connection con = JDBCUtil.getConnection();
 
-            String sql = "INSERT INTO reservation(FullName, Email, Phone, BookingDate, BookingTime, NumberOfPeople, Requirement, CustomerID)" +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO reservation(FullName, Email, Phone, BookingDate, BookingTime, NumberOfPeople, Requirement, CustomerID, TableID)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -31,6 +34,7 @@ public class ReservationDAO implements DAOInterface<Reservation>{
             pst.setInt(6, reservation.getNumberOfPeople());
             pst.setString(7, reservation.getRequirement());
             pst.setInt(8, reservation.getCustomerID());
+            pst.setInt(9, reservation.getTableID());
 
 
 
@@ -131,8 +135,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
                 int customeriD = rs.getInt("CustomerID");
+                int tableid = rs.getInt("TableID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customeriD);
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customeriD, tableid);
 
 
                 result.add(reservation);
@@ -290,6 +295,114 @@ public class ReservationDAO implements DAOInterface<Reservation>{
         }
         return result;
     }
+
+    public ArrayList<Reservation> selectByRealDate (LocalDate currentDate) {
+        ArrayList<Reservation> result = new ArrayList<Reservation>();
+
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "SELECT * FROM reservation" +
+                    " WHERE BookingDate = ?";
+
+            java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setDate(1, sqlDate);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("ReservationID");
+                String name = rs.getString("FullName");
+                String email = rs.getString("Email");
+                String phone = rs.getString("Phone");
+                Date BookingDate = rs.getDate("BookingDate");
+                Time BookingTime = rs.getTime("BookingTime");
+                int noPeople = rs.getInt("NumberOfPeople");
+                String requirement = rs.getString("Requirement");
+                int customeriD = rs.getInt("CustomerID");
+                int tableID = rs.getInt("TableID");
+
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customeriD, tableID);
+
+
+                result.add(reservation);
+            }
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<Integer> checkReservation(Reservation reservation) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "SELECT ReservationID, TableID FROM reservation" +
+                    " WHERE bookingdate = ?" +
+                    " AND bookingtime = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setDate(1, reservation.getBookingDate());
+            pst.setTime(2, reservation.getBookingTime());
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                int id = rs.getInt("ReservationID");
+                int tableid = rs.getInt("TableID");
+
+                result.add(tableid);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
+    public ArrayList<Integer> selectTableID(LocalDate currentDate, LocalTime currentTime) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "SELECT tableid from reservation" +
+                    " WHERE bookingdate = ? AND bookingtime = ?";
+
+            java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
+            java.sql.Time sqlTime = java.sql.Time.valueOf(currentTime);
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setDate(1, sqlDate);
+            pst.setTime(2, sqlTime);
+
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                int tableid = rs.getInt("TableID");
+
+                result.add(tableid);
+            }
+
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
 
 }
 
