@@ -95,7 +95,8 @@ public class AdminMenuUI {
         System.out.println("---------UPDATE TABLE----------");
         System.out.println("[1] Update capacity");
         System.out.println("[2] Update type");
-        System.out.println("[3] Update both");
+        System.out.println("[3] Update status");
+        System.out.println("[4] Update both");
         System.out.println("[0] Go back");
     }
 

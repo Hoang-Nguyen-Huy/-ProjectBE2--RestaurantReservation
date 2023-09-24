@@ -2,7 +2,6 @@ package DataLayer.DAO;
 
 import DataLayer.DM.Admin;
 import DataLayer.DM.Customer;
-import jdk.nashorn.internal.scripts.JD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

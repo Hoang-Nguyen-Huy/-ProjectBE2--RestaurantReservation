@@ -143,4 +143,25 @@ public class AdminValidation {
         return true;
     }
 
+
+    public static boolean isValidStatusOfTable (String type){
+        if(type.isEmpty()){
+            System.out.println("Status can not be empty!");
+            return false;
+        }
+
+        if(!isSupportedStatusOfTable(type)) return false;
+
+        return true;
+    }
+
+    private static boolean isSupportedStatusOfTable(String type) {
+        String[] supportedTypes = new String[]{"unavailable", "available"};
+        for (String supportedString : supportedTypes) {
+            if (supportedString.equals(type))
+                return true;
+        }
+        return false;
+    }
+
 }

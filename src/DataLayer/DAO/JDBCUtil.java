@@ -11,9 +11,9 @@ public class JDBCUtil {
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 
-            String url = "jdbc:mySQL://localhost:3306/restaurantreservation";
+            String url = "jdbc:mySQL://localhost:3306/restaurantReservation";
             String username = "root";
-            String password = "Thanhtri291104@";
+            String password = "1234512345";
 
             c = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {

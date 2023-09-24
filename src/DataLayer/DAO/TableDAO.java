@@ -5,7 +5,6 @@ import DataLayer.DM.Admin;
 import DataLayer.DM.Reservation;
 import DataLayer.DM.TableOfRestaurant;
 import PresentationLayer.UI.AdminMenuUI;
-import jdk.nashorn.internal.scripts.JD;
 
 import java.nio.charset.CodingErrorAction;
 import java.sql.Connection;
@@ -15,6 +14,9 @@ import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
+
+import BusinessLogicLayer.AdminValidation;
 
 public class TableDAO implements DAOInterface<TableOfRestaurant>{
 
@@ -418,6 +420,42 @@ public class TableDAO implements DAOInterface<TableOfRestaurant>{
             }
 
             result = pst.executeUpdate();
+
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updateStatus(TableOfRestaurant tableOfRestaurant) {
+        int result = 0;
+        Scanner sc = new Scanner(System.in);
+        String status = "";
+
+        do{
+            System.out.print("Enter status: ");
+            status = sc.nextLine();
+        }while (!AdminValidation.isValidStatusOfTable(status));
+
+        try {
+            Connection con = JDBCUtil.getConnection();
+
+            String sql = "UPDATE tableofrestaurant" +
+                    " SET " +
+                    " TableStatus = ?" +
+                    " WHERE TableID = ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setString(1, status);
+            pst.setInt(2, tableOfRestaurant.getTableID());
+
+            result = pst.executeUpdate();
+
+            if (result != 0) {
+                System.out.println("Update type successfully!!!");
+            }
 
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
