@@ -1,5 +1,6 @@
 package DataLayer.DAO;
 
+import BusinessLogicLayer.AdminValidation;
 import DataLayer.DM.Admin;
 import DataLayer.DM.Staff;
 import PresentationLayer.UI.AdminMenuUI;
@@ -9,9 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StaffDAO implements DAOInterface<Staff> {
     AdminMenuUI ui = new AdminMenuUI();
+
+    Scanner sc = new Scanner(System.in);
+
     public static StaffDAO getInstance() {
         return new StaffDAO();
     }
@@ -77,9 +82,12 @@ public class StaffDAO implements DAOInterface<Staff> {
 
     public int updateName (Staff staff) {
         int result = 0;
+        String newName = "";
+        do{
+            System.out.print("Enter new full name: ");
+            newName = sc.nextLine();
+        }while(!AdminValidation.isValidName(newName));
 
-        System.out.print("Enter new full name: ");
-        String newName = ui.EnterInfor();
         try {
             Connection con = JDBCUtil.getConnection();
 
@@ -109,8 +117,12 @@ public class StaffDAO implements DAOInterface<Staff> {
     public int updatePhone(Staff staff) {
         int result = 0;
 
-        System.out.print("Enter new phone: ");
-        String newPhone = ui.EnterInfor();
+        String newPhone = "";
+        do{
+            System.out.print("Enter phone: ");
+            newPhone = sc.nextLine();
+        }while(!AdminValidation.isValidPhone(newPhone));
+
         try {
             Connection con = JDBCUtil.getConnection();
 
@@ -139,9 +151,12 @@ public class StaffDAO implements DAOInterface<Staff> {
 
     public int updateRole(Staff staff) {
         int result = 0;
+        String newRole = "";
+        do{
+            System.out.print("Enter role [Manager, Chef, Waitstaff]: ");
+            newRole = sc.nextLine();
+        }while(!AdminValidation.isValidRole(newRole));
 
-        System.out.print("Enter new role: ");
-        String newRole = ui.EnterInfor();
         try {
             Connection con = JDBCUtil.getConnection();
 
