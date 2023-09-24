@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class AdminMenuLogic {
     AdminMenuUI ui = new AdminMenuUI();
+    Scanner sc = new Scanner(System.in);
     public boolean checkInt(String choices) {
         try {
             Integer.parseInt(choices);
@@ -57,13 +58,27 @@ public class AdminMenuLogic {
             ui.displayMenuStaff();
             switch (ui.EnterChoices()) {
                 case 1:
+                    String name = "";
+                    String phone = "";
+                    String role = "";
                     System.out.println("Add more Staffs");
                     System.out.print("Enter full name: ");
-                    String name = ui.EnterInfor();
-                    System.out.print("Enter phone: ");
-                    String phone = ui.EnterInfor();
-                    System.out.print("Enter role: ");
-                    String role = ui.EnterInfor();
+
+                    do{
+                        System.out.print("Enter full name: ");
+                        name = sc.nextLine();
+                    }while(!AdminValidation.isValidName(name));
+
+                    do{
+                        System.out.print("Enter phone: ");
+                        phone = sc.nextLine();
+                    }while(!AdminValidation.isValidPhone(phone));
+
+                    do{
+                        System.out.print("Enter role [Manager, Chef, Waitstaff]: ");
+                        role = sc.nextLine();
+                    }while(!AdminValidation.isValidRole(role));
+
                     Staff staff1 = new Staff(name, phone, role);
                     StaffDAO.getInstance().insert(staff1);
                     break;
@@ -143,6 +158,10 @@ public class AdminMenuLogic {
                     StaffDAO.getInstance().updateRole(staffUpRole);
                     break;
                 case 4:
+                    String name = "";
+                    String phone = "";
+                    String role = "";
+                    Scanner sc = new Scanner(System.in);
                     System.out.println("Show all Staffs");
                     ArrayList<Staff> list4 = StaffDAO.getInstance().selectAll();
                     for(Staff staff : list4) {
@@ -151,12 +170,21 @@ public class AdminMenuLogic {
                    System.out.println("-----Update all information-----");
                    System.out.print("Enter the StaffID that you want to update. ");
                    int id = ui.EnterChoices();
-                   System.out.print("Enter new full name: ");
-                   String name = ui.EnterInfor();
-                   System.out.print("Enter new phone: ");
-                   String phone = ui.EnterInfor();
-                   System.out.print("Enter new role: ");
-                   String role = ui.EnterInfor();
+
+                    do{
+                        System.out.print("Enter full name: ");
+                        name = sc.nextLine();
+                    }while(!AdminValidation.isValidName(name));
+
+                    do{
+                        System.out.print("Enter phone: ");
+                        phone = sc.nextLine();
+                    }while(!AdminValidation.isValidPhone(phone));
+
+                    do{
+                        System.out.print("Enter role [Manager, Chef, Waitstaff]: ");
+                        role = sc.nextLine();
+                    }while(!AdminValidation.isValidRole(role));
 
                    Staff staffUpAll = new Staff(id, name, phone, role);
                    StaffDAO.getInstance().update(staffUpAll);
@@ -210,11 +238,21 @@ public class AdminMenuLogic {
             ui.displayMenuTable();
             switch (ui.EnterChoices()) {
                 case 1:
+                    String sCapacity = "";
+                    String type = "";
                     System.out.println("-----Add more Tables-----");
-                    System.out.print("Enter capacity of table. ");
-                    int capacity = ui.EnterChoices();
+                    do{
+                        System.out.print("Enter capacity of table: ");
+                        sCapacity = sc.nextLine();
+                    }while (AdminValidation.isValidCapacity(sCapacity));
+
+                    int capacity = Integer.parseInt(sCapacity);
+
                     System.out.print("Enter type of table: ");
-                    String type = ui.EnterInfor();
+                    do{
+                        System.out.print("Enter type of table [Standard, Round, Outdoor]: ");
+                        type = sc.nextLine();
+                    }while (AdminValidation.isValidTypeOfTable(type));
 
                     TableOfRestaurant tableOfRestaurant = new TableOfRestaurant(capacity, type);
                     TableDAO.getInstance().insert(tableOfRestaurant);
@@ -342,15 +380,33 @@ public class AdminMenuLogic {
             ui.displayMenuDish();
             switch (ui.EnterChoices()) {
                 case 1:
+                    String name = "";
+                    String sPrice = "";
+                    String description = "";
+                    String sRate = "";
                     System.out.println("----Add more Dish-----");
-                    System.out.print("Enter name: ");
-                    String name = ui.EnterInfor();
-                    System.out.print("Enter price: ");
-                    double price = ui.parseDouble();
+
+                    do{
+                        System.out.print("Enter name: ");
+                        name = sc.nextLine();
+                    }while (AdminValidation.isValidName(name));
+
+                    do{
+                        System.out.print("Enter price: ");
+                        sPrice = sc.nextLine();
+                    }while (AdminValidation.isValidDouble(sPrice));
+                    double price = Double.parseDouble(sPrice);
+
+
                     System.out.print("Enter description: ");
-                    String description = ui.EnterInfor();
-                    System.out.print("Enter rate: ");
-                    double rate = ui.parseDouble();
+                    description = ui.EnterInfor();
+
+                    do{
+                        System.out.print("Enter rate: ");
+                        sRate = sc.nextLine();
+                    }while (AdminValidation.isValidDouble(sRate));
+                    double rate = Double.parseDouble(sRate);
+
 
                     Dish dish = new Dish(name, price, description, rate);
                     DishDAO.getInstance().insert(dish);

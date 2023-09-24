@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class CustomerMenuUI {
 
     public void display(){
+        System.out.println("---------CUSTOMER'S MENU----------");
         System.out.println("[1] Show Menu");
         System.out.println("[2] Reservation");
         System.out.println("[0] Go back");
@@ -29,6 +30,7 @@ public class CustomerMenuUI {
     }
 
     public void displayShowDish () {
+        System.out.println("---------SHOW DISH----------");
         System.out.println("[1] Show all Dish");
         System.out.println("[2] Show all Dish with increasing PRICE");
         System.out.println("[3] Show all Dish with decreasing PRICE");

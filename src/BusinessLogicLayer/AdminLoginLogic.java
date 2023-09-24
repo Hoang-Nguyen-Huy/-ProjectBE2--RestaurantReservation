@@ -35,6 +35,9 @@ public class AdminLoginLogic {
                 case 0:
                     isRunningMenuOwner = false;
                     break;
+                default:
+                    System.out.println("Please enter a number from 0-1");
+                    break;
             }
         }
     }

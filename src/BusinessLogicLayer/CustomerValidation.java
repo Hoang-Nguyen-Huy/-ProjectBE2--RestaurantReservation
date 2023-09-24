@@ -9,62 +9,15 @@ public class CustomerValidation {
             System.out.println("Full name can not be empty!");
             return false;
         }
-        /*
-        char[] usernameChar = username.trim().toCharArray();
-        int usernameCharLen = usernameChar.length;
-        int currentPosition = 0;
 
-        if (isSupportedSymbolsUsername(usernameChar[0]) || isSupportedSymbolsUsername(usernameChar[usernameCharLen - 1])) {
-            System.out.println("Cannot use these symbols at the beginning or the end of the username: '_', '.', '-'");
+        if (username.matches("^.*[0-9!@#$%^&*(){}_+-=*/.<>?|].*")){
+            System.out.println("Username can only contain characters");
             return false;
         }
-
-        for (char c : usernameChar) {
-            if (!Character.isLetterOrDigit(c)) {
-                if (!isSupportedSymbolsUsername(c)) {
-                    System.out.println("Cannot use any symbols except '_', '.', '-'");
-                    return false;
-                }
-
-                if (isSupportedSymbolsUsername(c) && isSupportedSymbolsUsername(usernameChar[currentPosition + 1])) {
-                    System.out.println("These symbols ('_', '.', '-') cannot be consecutively");
-                    return false;
-                }
-                //      Note: có thể bỏ việc khoảng trắng :>
-                if (Character.isWhitespace(c)) {
-                    System.out.println("Username cannot contain whitespace");
-                    return false;
-                }
-
-
-            }
-            currentPosition++;
-        }
-        */
-
-        if (username.matches("[0-9-]+")){
-            System.out.println("Username can not contain digits");
-            return false;
-        }
-        /*
-        if (!username.matches("[A-Za-z]+")){
-            System.out.println("Username only contain chacracters");
-            return false;
-        }
-
-         */
 
         return true;
     }
 
-    private static boolean isSupportedSymbolsUsername(char c) {
-        char[] supportedCharacters = new char[]{'_', '.', '-'};
-        for (char supportedCharacter : supportedCharacters) {
-            if (supportedCharacter == c)
-                return true;
-        }
-        return false;
-    }
 
     public static boolean isValidEmail(String email) {
 
@@ -90,19 +43,25 @@ public class CustomerValidation {
             return false;
         }
 
-        if(phone.length()>10){
-            System.out.println("Phone can not be larger than 10 characters");
+        if (!phone.matches("^[0-9]+$")) {
+            System.out.println("Phone numbers can only contain digits");
             return false;
         }
 
-        if (!phone.matches("[0-9-]+")){
-            System.out.println("Phone numbers can only contain digits");
+        if(phone.length()!=10){
+            System.out.println("Phone must be have 10 characters");
             return false;
         }
         return true;
     }
 
     public static boolean isValidDate(String date) {
+
+        if(date.isEmpty()){
+            System.out.println("Date can not be empty!");
+            return false;
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         try {
@@ -115,6 +74,12 @@ public class CustomerValidation {
     }
 
     public static boolean isValidTime(String time) {
+
+        if(time.isEmpty()){
+            System.out.println("Time can not be empty!");
+            return false;
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         sdf.setLenient(false);
 
@@ -125,4 +90,33 @@ public class CustomerValidation {
             return false;
         }
     }
+
+    public static boolean isValidNoPeople(String noPeople) {
+        if (noPeople.isEmpty()) {
+            System.out.println("Number of people can not be empty!");
+            return false;
+        }
+
+        if (noPeople.matches("\\d+")) {
+            int intValue = Integer.parseInt(noPeople);
+            if (intValue < 1) {
+                System.out.println("Number of people must be a positive integer!");
+                return false;
+            }
+        } else {
+            System.out.println("Number of people must be a positive integer!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean isValidRequirement(String requirement) {
+        if (requirement.length() > 1000) {
+            System.out.println("Your requirement is too long!!!");
+            return false;
+        }
+        return true;
+    }
+
 }
