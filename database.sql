@@ -44,7 +44,9 @@ CREATE TABLE reservation (
     NumberOfPeople INT NOT NULL, 
     Requirement VARCHAR(1024),
     CustomerID INT NOT NULL, 
-    FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID)
+    TableID INT NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID),
+    FOREIGN KEY (TableID) REFERENCES tableofrestaurant (TableID)
 );
 
 CREATE TABLE tableOfRestaurant (

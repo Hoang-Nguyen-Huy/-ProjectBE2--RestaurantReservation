@@ -194,6 +194,17 @@ public class AdminMenuLogic {
                         System.out.println(reservation.toString());
                     }
                     break;
+                case 3: 
+                    System.out.println("-----Delete Reservation Booking-----");
+                    ArrayList<Reservation> list3 = ReservationDAO.getInstance().selectAll();
+                    for(Reservation reservation : list3) {
+                        System.out.println(reservation.toString());
+                    }
+                    System.out.print("Enter the phone number: ");
+                    String phone1 = ui.EnterInfor();
+                    Reservation reservationByPhone1 = new Reservation(phone1);
+                    ReservationDAO.getInstance().delete(reservationByPhone1);
+                    break;
                 case 0:
                     isRunningReservation = false;
                     break;

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
+
 public class Reservation {
     private int ReservationID;
     private String FullName;
@@ -13,13 +14,17 @@ public class Reservation {
     private Time BookingTime;
     private int NumberOfPeople;
     private String Requirement;
+    
 
     private int CustomerID;
+
+    private int TableID;
 
     public Reservation () {
 
     }
-    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
+
+    public Reservation(int ReservationID, String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID, int TableID) {
         this.ReservationID = ReservationID;
         this.FullName = FullName;
         this.Email = Email;
@@ -29,6 +34,7 @@ public class Reservation {
         this.NumberOfPeople = NumberOfPeople;
         this.Requirement = Requirement;
         this.CustomerID = CustomerID;
+        this.TableID = TableID;
     }
 
     public Reservation(String FullName, String Email, String Phone, Date BookingDate, Time BookingTime, int NumberOfPeople, String Requirement, int CustomerID) {
@@ -130,16 +136,17 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" +
-                "ReservationID=" + ReservationID +
-                ", FullName='" + FullName + '\'' +
-                ", Email='" + Email + '\'' +
-                ", Phone='" + Phone + '\'' +
-                ", BookingDate=" + BookingDate +
-                ", BookingTime=" + BookingTime +
-                ", NumberOfPeople=" + NumberOfPeople +
-                ", Requirement='" + Requirement + '\'' +
-                ", CustomerID=" + CustomerID +
-                '}';
+        return ReservationID + " | " + CustomerID + " | " + FullName + " | " + Email + " | " + Phone + " | " + BookingDate + " | " + BookingTime + " | " + NumberOfPeople + " | " + (Requirement.length() > 20 ? Requirement.substring(0, 20) : Requirement) + " | " ;
+        // return "Reservation{" +
+        //         "ReservationID=" + ReservationID +
+        //         ", FullName='" + FullName + '\'' +
+        //         ", Email='" + Email + '\'' +
+        //         ", Phone='" + Phone + '\'' +
+        //         ", BookingDate=" + BookingDate +
+        //         ", BookingTime=" + BookingTime +
+        //         ", NumberOfPeople=" + NumberOfPeople +
+        //         ", Requirement='" + Requirement + '\'' +
+        //         ", CustomerID=" + CustomerID +
+        //         '}';
     }
 }

@@ -27,7 +27,7 @@ public class DishDAO implements DAOInterface<Dish>{
 
             PreparedStatement pst = con.prepareStatement(sql);
 
-            pst.setString(1,dish.getDishName());
+            pst.setString(1, dish.getDishName());
             pst.setDouble(2, dish.getPrice());
             pst.setString(3, dish.getDescription());
             pst.setDouble(4, dish.getDishRate());

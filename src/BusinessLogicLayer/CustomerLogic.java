@@ -14,6 +14,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+
 public class CustomerLogic {
     Scanner sc = new Scanner(System.in);
     CustomerMenuUI ui = new CustomerMenuUI();
@@ -54,6 +56,13 @@ public class CustomerLogic {
             }
         }
     }
+
+    public void printDish(ArrayList<Dish> list) {
+        for (Dish dish : list) {
+            System.out.println(dish.toString());
+        }
+    }
+
     public void showMenu () {
         boolean isRunningShowDish = true;
         while(isRunningShowDish) {
@@ -62,37 +71,35 @@ public class CustomerLogic {
                 case 1:
                     System.out.println("-----Show all Dish-----");
                     ArrayList<Dish> list1 = DishDAO.getInstance().selectAll();
-                    for (Dish dish1 : list1) {
-                        System.out.println(dish1.toString());
-                    }
+                    // System.out.println(bookingDate);
+                    
+                    printDish(list1);
                     break;
                 case 2:
                     System.out.println("-----Show all Dish with increasing PRICE-----");
                     ArrayList<Dish> list2 = DishDAO.getInstance().increasingPrice();
-                    for (Dish dish2 : list2) {
-                        System.out.println(dish2.toString());
-                    }
+
+                    printDish(list2);
                     break;
                 case 3:
                     System.out.println("-----Show all Dish with decreasing PRICE-----");
                     ArrayList<Dish> list3 = DishDAO.getInstance().decreasingPrice();
-                    for (Dish dish3 : list3) {
-                        System.out.println(dish3.toString());
-                    }
+
+
+                    printDish(list3);
                     break;
                 case 4:
                     System.out.println("-----Show all Dish with increasing RATE-----");
                     ArrayList<Dish> list4 = DishDAO.getInstance().increasingRate();
-                    for (Dish dish4 : list4) {
-                        System.out.println(dish4.toString());
-                    }
+
+                    
+                    printDish(list4);
                     break;
                 case 5:
                     System.out.println("-----Show all Dish with decreasing RATE-----");
                     ArrayList<Dish> list5 = DishDAO.getInstance().decreasingRate();
-                    for (Dish dish5 : list5) {
-                        System.out.println(dish5.toString());
-                    }
+                    
+                    printDish(list5);
                     break;
                 case 0:
                     isRunningShowDish = false;

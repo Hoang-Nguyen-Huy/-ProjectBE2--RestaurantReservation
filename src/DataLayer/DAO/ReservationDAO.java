@@ -45,6 +45,39 @@ public class ReservationDAO implements DAOInterface<Reservation>{
         return result;
     }
 
+    public int abc(Reservation reservation) {
+        int result = 0;
+        try {
+            Connection con = JDBCUtil.getConnection(); 
+            String sql = "CREATE TABLE result_table AS " +
+                    "SELECT " +
+                    "    t.capacity, " +
+                    "    'available' AS status " +
+                    "FROM " +
+                    "    tableofrestaurant t " +
+                    "JOIN " +
+                    "    reservation r ON t.TableId = r.TableId " +
+                    "WHERE " +
+                    "    r.BookingDate = ? " +
+                    "    AND r.BookingTime = ? " +
+                    "    AND t.capacity >= ?";
+
+            PreparedStatement pst = con.prepareStatement(sql);
+
+            pst.setDate(1, reservation.getBookingDate());
+            pst.setTime(2, reservation.getBookingTime());
+            pst.setInt(3, reservation.getNumberOfPeople());
+
+            result = pst.executeUpdate();
+
+            System.out.println("Table 'Result_table' is sucessfully created!!!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;    
+    }
+
     @Override
     public int update(Reservation reservation) {
         int result = 0;
@@ -75,7 +108,7 @@ public class ReservationDAO implements DAOInterface<Reservation>{
 
             result = pst.executeUpdate();
 
-            System.out.println("There is " + result + " upate");
+            System.out.println("There is " + result + " update");
 
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -131,9 +164,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
                 int customeriD = rs.getInt("CustomerID");
+                int tableiD = rs.getInt("TableID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customeriD);
-
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customeriD, tableiD);
 
                 result.add(reservation);
             }
@@ -170,8 +203,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
                 int customerID = rs.getInt("CustomerID");
+                int tableiD = rs.getInt("TableID");
 
-                result = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID);
+                result = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID, tableiD);
             }
 
             JDBCUtil.closeConnection(con);
@@ -205,8 +239,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
                 int customerID = rs.getInt("CustomerID");
+                int tableiD = rs.getInt("TableID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID);
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID, tableiD);
 
 
                 result.add(reservation);
@@ -243,8 +278,9 @@ public class ReservationDAO implements DAOInterface<Reservation>{
                 int noPeople = rs.getInt("NumberOfPeople");
                 String requirement = rs.getString("Requirement");
                 int customerID = rs.getInt("CustomerID");
+                int tableiD = rs.getInt("TableID");
 
-                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID);
+                Reservation reservation = new Reservation(id, name, email, phone, BookingDate, BookingTime, noPeople, requirement, customerID, tableiD);
 
                 result.add(reservation);
             }
