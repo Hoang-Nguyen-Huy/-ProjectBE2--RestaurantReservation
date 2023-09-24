@@ -336,7 +336,7 @@ public class AdminMenuLogic {
                     TableDAO.getInstance().updateCapacity(table);
                     break;
                 case 2:
-                    System.out.println("-----UPDATE TYPE-----");
+                    System.out.println("-----Update type-----");
                     ArrayList<TableOfRestaurant> list2 = TableDAO.getInstance().selectAll();
                     for(TableOfRestaurant table1 : list2) {
                         System.out.println(table1.toString());
@@ -347,26 +347,38 @@ public class AdminMenuLogic {
                     TableDAO.getInstance().updateType(table1);
                     break;
                 case 3:
-                    System.out.println("-----UPDATE BOTH-----");
+                    System.out.println("-----Update table status-----");
                     ArrayList<TableOfRestaurant> list3 = TableDAO.getInstance().selectAll();
                     for(TableOfRestaurant table2 : list3) {
                         System.out.println(table2.toString());
                     }
                     System.out.print("Enter table id for updating. ");
                     int id2 = ui.EnterChoices();
+                    TableOfRestaurant table2 = new TableOfRestaurant(id2);
+                    TableDAO.getInstance().updateStatus(table2);
+                    break;
+                case 4:
+                    System.out.println("-----Update both-----");
+                    ArrayList<TableOfRestaurant> list4 = TableDAO.getInstance().selectAll();
+                    for(TableOfRestaurant table3 : list4) {
+                        System.out.println(table3.toString());
+                    }
+                    System.out.print("Enter table id for updating. ");
+                    int id3 = ui.EnterChoices();
                     System.out.print("Enter new capacity. ");
                     int capacity = ui.EnterChoices();
                     System.out.print("Enter new type: ");
                     String type = ui.EnterInfor();
 
-                    TableOfRestaurant table2 = new TableOfRestaurant(id2, capacity, type);
-                    TableDAO.getInstance().update(table2);
+                    TableOfRestaurant table3 = new TableOfRestaurant(id3, capacity, type);
+                    TableDAO.getInstance().update(table3);
                     break;
+
                 case 0:
                     isRunningUpdateTalbe = false;
                     break;
                 default:
-                    System.out.println("Please enter a number from 0-3");
+                    System.out.println("Please enter a number from 0-4");
                     break;
             }
         }

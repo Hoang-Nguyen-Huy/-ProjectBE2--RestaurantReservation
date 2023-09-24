@@ -2,7 +2,6 @@ package DataLayer.DAO;
 
 import DataLayer.DM.Admin;
 import DataLayer.DM.Reservation;
-import jdk.nashorn.internal.scripts.JD;
 
 import java.sql.*;
 import java.time.LocalDate;
